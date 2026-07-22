@@ -1,0 +1,2 @@
+import type{Achievement,TeamStats}from"@/types";
+export function earnedAchievements(s:TeamStats,a:Achievement[]){return a.filter(x=>x.criterion==="first_win"&&s.wins>=1||x.criterion==="five_wins"&&s.wins>=5||x.criterion==="jackpot_qualified"&&s.jackpotQualifications>=1||x.criterion==="jackpot_winner"&&s.jackpotWins>=1||x.criterion==="panty_100"&&s.pantyPoints>=100||x.criterion==="average"&&s.averageScore>=600&&s.averageScore<=700);}
