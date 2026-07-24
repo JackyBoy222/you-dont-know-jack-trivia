@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Menu } from "lucide-react";
 import { NavigationButton } from "@/components/ui";
 
@@ -7,8 +8,14 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-cream/10 bg-ink/90 text-cream backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <Link href="/" className="flex items-center gap-3 font-display text-lg font-black uppercase leading-none tracking-[-.05em]">
-          <span className="grid size-9 place-items-center rounded-lg border-2 border-cream/70 bg-magenta text-xs text-cream shadow-[3px_3px_0_#00c8d7]">J!</span>
-          <span>You Don&apos;t Know <span className="text-magenta">Jack</span></span>
+          <Image
+            src="/ydkj-logo.png"
+            alt=""
+            width={42}
+            height={42}
+            className="size-10 rounded-xl border border-cyan/50 object-cover shadow-[3px_3px_0_#f04b9b]"
+          />
+          <span className="text-cream">You Don&apos;t Know Jack</span>
         </Link>
         <details className="relative md:hidden">
           <summary

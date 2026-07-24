@@ -31,7 +31,7 @@ export function HomePage({ data }: { data: HomeData }) {
             <DemoBadge />
             <p className="eyebrow mt-8">Live trivia · New Orleans</p>
             <h1 className="mt-4 max-w-4xl font-display text-[clamp(4.2rem,12vw,8.4rem)] font-black uppercase leading-[.75] tracking-[-.085em] text-cream">
-              You Don&apos;t<br /><span className="neon-magenta">Know Jack</span>
+              You Don&apos;t<br /><span>Know Jack</span>
             </h1>
             <div className="mt-6 inline-flex rotate-[-2deg] items-center rounded-xl border-2 border-cyan/70 bg-ink px-5 py-2 shadow-[6px_6px_0_#f04b9b]">
               <span className="neon-script neon-cyan text-3xl sm:text-4xl">Trivia</span>
