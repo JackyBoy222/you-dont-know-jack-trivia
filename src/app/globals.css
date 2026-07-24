@@ -211,6 +211,38 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   color: #ff71b6;
   text-shadow: 0 0 5px rgba(240,75,155,.85), 0 0 22px rgba(240,75,155,.48);
 }
+.neon-cyan {
+  color: #9ff9ff;
+  text-shadow: 0 0 5px rgba(0,200,215,.9), 0 0 22px rgba(0,200,215,.5);
+}
+.neon-script {
+  font-family: "Brush Script MT", "Segoe Script", "Snell Roundhand", cursive;
+  font-weight: 700;
+  line-height: .95;
+  letter-spacing: .015em;
+  text-transform: none;
+}
+
+.dark-page {
+  color: var(--color-paper);
+}
+.dark-page .card {
+  border-color: rgba(0,200,215,.24);
+  color: var(--color-paper);
+  background:
+    linear-gradient(120deg, rgba(255,255,255,.045), transparent 35%),
+    #202027;
+  box-shadow: 0 10px 0 #08080b, 0 18px 38px rgba(0,0,0,.28);
+}
+.dark-page .card:nth-of-type(even) { border-color: rgba(240,75,155,.25); }
+.dark-page [class*="text-ink/"] { color: rgba(255,250,240,.68); }
+.dark-page .field {
+  border-color: rgba(0,200,215,.28);
+  color: var(--color-paper);
+  background: #111115;
+}
+.dark-page .field::placeholder { color: rgba(255,250,240,.38); }
+.dark-page table { color: var(--color-paper); background: rgba(17,17,21,.52); }
 
 .arcade-intro {
   --intro-progress: 0;

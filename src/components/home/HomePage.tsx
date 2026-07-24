@@ -33,8 +33,8 @@ export function HomePage({ data }: { data: HomeData }) {
             <h1 className="mt-4 max-w-4xl font-display text-[clamp(4.2rem,12vw,8.4rem)] font-black uppercase leading-[.75] tracking-[-.085em] text-cream">
               You Don&apos;t<br /><span className="neon-magenta">Know Jack</span>
             </h1>
-            <div className="mt-5 inline-flex rotate-[-2deg] items-center rounded-xl border-2 border-ink bg-ink px-4 py-2 shadow-[6px_6px_0_#00c8d7]">
-              <span className="font-mono text-xl font-black tracking-[.34em] text-cream sm:text-2xl">TRIVIA</span>
+            <div className="mt-6 inline-flex rotate-[-2deg] items-center rounded-xl border-2 border-cyan/70 bg-ink px-5 py-2 shadow-[6px_6px_0_#f04b9b]">
+              <span className="neon-script neon-cyan text-3xl sm:text-4xl">Trivia</span>
             </div>
             <p className="mt-8 max-w-xl text-lg font-medium leading-8 text-cream/68">A fast, funny game show for smart friends, loud rooms, and gloriously wrong answers.</p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -42,7 +42,7 @@ export function HomePage({ data }: { data: HomeData }) {
               <Link className="btn-secondary" href="/book-jack"><Mic2 className="size-5" />Book Jack</Link>
             </div>
           </div>
-          {upcoming[0] && <article className="cabinet-panel dive-laminate scanlines relative p-7 sm:p-9">
+          {upcoming[0] && <article className="cabinet-panel dive-laminate scanlines relative p-7 sm:p-9 lg:mt-10">
             <div className="absolute right-5 top-5 flex gap-2" aria-hidden="true">
               <span className="size-3 rounded-full border border-ink bg-magenta" />
               <span className="size-3 rounded-full border border-ink bg-brass" />

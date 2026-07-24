@@ -10,8 +10,9 @@ const eventTypes = [
 ];
 
 export default function BookJackPage() {
-  return <div className="mx-auto max-w-6xl px-4 py-12">
+  return <div className="dark-page mx-auto max-w-6xl px-4 py-12">
     <p className="eyebrow">Bring the circus</p><h1 className="mt-2 max-w-4xl font-display text-5xl font-black">Trivia your guests will talk about after they forget the hors d&apos;oeuvres.</h1>
+    <p className="neon-script neon-magenta mt-4 text-4xl sm:text-5xl">Book Jack</p>
     <p className="mt-5 max-w-3xl text-lg leading-8 text-ink/68">You Don&apos;t Know Jack is a hosted entertainment experience: smart questions, fast pacing, big laughs, and a show adapted to your room.</p>
     <div className="mt-10 grid gap-4 md:grid-cols-2">{eventTypes.map(([title, copy]) => <article className="card" key={title}><h2 className="font-display text-2xl font-bold">{title}</h2><p className="mt-3 leading-7 text-ink/60">{copy}</p></article>)}</div>
     <section className="mt-14 grid gap-8 lg:grid-cols-[.8fr_1.2fr]">

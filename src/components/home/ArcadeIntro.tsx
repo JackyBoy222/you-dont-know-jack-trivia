@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 export function ArcadeIntro() {
   const introRef = useRef<HTMLDivElement>(null);
+  const completedRef = useRef(false);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -13,11 +14,15 @@ export function ArcadeIntro() {
 
     const update = () => {
       frame = 0;
+      if (completedRef.current) return;
       const progress = reducedMotion.matches
         ? 1
         : Math.min(window.scrollY / (window.innerHeight * 0.24), 1);
       intro?.style.setProperty("--intro-progress", progress.toString());
-      setIsOpen(progress >= 0.99);
+      if (progress >= 0.99) {
+        completedRef.current = true;
+        setIsOpen(true);
+      }
     };
     const requestUpdate = () => {
       if (!frame) frame = window.requestAnimationFrame(update);
