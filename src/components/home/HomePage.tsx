@@ -33,8 +33,8 @@ export function HomePage({ data }: { data: HomeData }) {
             <h1 className="mt-4 max-w-4xl font-display text-[clamp(4.2rem,12vw,8.4rem)] font-black uppercase leading-[.75] tracking-[-.085em] text-cream">
               You Don&apos;t<br /><span>Know Jack</span>
             </h1>
-            <div className="mt-8">
-              <span className="neon-script neon-cyan inline-block rotate-[-3deg] text-6xl sm:text-7xl lg:text-8xl">Trivia</span>
+            <div className="mt-9 flex max-w-[42rem] justify-center">
+              <span className="neon-script neon-cyan inline-block rotate-[2deg] scale-x-110 text-7xl sm:text-8xl lg:text-9xl">Trivia</span>
             </div>
             <p className="mt-8 max-w-xl text-lg font-medium leading-8 text-cream/68">A fast, funny game show for smart friends, loud rooms, and gloriously wrong answers.</p>
             <div className="mt-8 flex flex-wrap gap-3">

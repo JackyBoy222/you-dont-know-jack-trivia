@@ -218,11 +218,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .neon-script {
   font-family: SignPainter, "Brush Script MT", "Segoe Script", "Snell Roundhand", cursive;
   font-weight: 700;
-  line-height: .82;
-  letter-spacing: -.025em;
+  line-height: .9;
+  letter-spacing: .035em;
   text-transform: none;
-  font-style: italic;
-  transform: skewX(-4deg);
+  font-style: normal;
 }
 
 .dark-page {
