@@ -1,0 +1,1 @@
+import{z}from"zod";export const eventSchema=z.object({theme:z.string().min(2,"Theme needs at least 2 characters"),date:z.string().min(1,"Choose a date"),jackpot:z.coerce.number().min(0),venue:z.string().min(2)});export const teamSchema=z.object({name:z.string().min(2),players:z.array(z.string().min(1)).min(1)});

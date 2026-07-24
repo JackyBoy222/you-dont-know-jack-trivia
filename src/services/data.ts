@@ -1,0 +1,4 @@
+import{achievements,awards,events,quips,results,teams,venues}from"@/data/demo";import{teamStatistics}from"@/lib/stats";
+export interface DataService{getEvents():Promise<typeof events>;getTeams():Promise<typeof teams>;getResults():Promise<typeof results>;getVenues():Promise<typeof venues>}
+export const mockDataService:DataService={async getEvents(){return structuredClone(events)},async getTeams(){return structuredClone(teams)},async getResults(){return structuredClone(results)},async getVenues(){return structuredClone(venues)}};
+export async function getData(){const [eventList,teamList,resultList,venueList]=await Promise.all([mockDataService.getEvents(),mockDataService.getTeams(),mockDataService.getResults(),mockDataService.getVenues()]);return{events:eventList,teams:teamList,results:resultList,venues:venueList,quips,awards,achievements,stats:teamStatistics(teamList,resultList),isDemo:true};}
