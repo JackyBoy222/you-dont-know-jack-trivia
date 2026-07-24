@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
   --font-body: "Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif;
   --font-display: "Arial Black", "Avenir Next Condensed", Impact, sans-serif;
   --font-readable: var(--font-body);
@@ -29,10 +29,10 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   background:
-    radial-gradient(circle at 4% 2%, rgba(0, 200, 215, .08), transparent 25rem),
-    radial-gradient(circle at 96% 16%, rgba(240, 75, 155, .08), transparent 26rem),
-    var(--color-canvas);
-  color: var(--color-ink);
+    radial-gradient(circle at 4% 2%, rgba(0, 200, 215, .16), transparent 28rem),
+    radial-gradient(circle at 96% 14%, rgba(240, 75, 155, .15), transparent 30rem),
+    linear-gradient(180deg, #15151a 0%, #0d0d11 58%, #17131a 100%);
+  color: var(--color-paper);
   font-family: var(--font-readable);
 }
 
@@ -51,6 +51,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   opacity: .035;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
   mix-blend-mode: multiply;
+}
+
+.arcade-home {
+  background:
+    linear-gradient(90deg, transparent 49.8%, rgba(255,255,255,.018) 50%, transparent 50.2%),
+    repeating-linear-gradient(0deg, transparent 0 72px, rgba(255,255,255,.018) 72px 73px);
 }
 
 .scanlines { position: relative; isolation: isolate; }
@@ -72,11 +78,19 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     var(--color-paper);
 }
 
+.dive-laminate {
+  color: var(--color-paper);
+  background:
+    linear-gradient(112deg, rgba(255,255,255,.07), transparent 22% 74%, rgba(255,255,255,.04)),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.018) 0 1px, transparent 1px 9px),
+    #202027;
+}
+
 .cabinet-panel, .cabaret-panel {
-  border: 2px solid var(--color-soft-black);
+  border: 2px solid rgba(0, 200, 215, .52);
   border-radius: 1.5rem;
-  background: var(--color-paper);
-  box-shadow: 0 9px 0 var(--color-soft-black), 0 20px 42px rgba(17,17,21,.13);
+  background: #202027;
+  box-shadow: 0 9px 0 #08080b, 0 0 34px rgba(0,200,215,.12), 0 22px 42px rgba(0,0,0,.4);
 }
 
 .card {
@@ -100,7 +114,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   font-weight: 900;
   letter-spacing: .2em;
   text-transform: uppercase;
-  color: #67636d;
+  color: var(--color-arcade-yellow);
 }
 .venue-number {
   font-family: var(--font-arcade-numeric);
@@ -160,8 +174,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   border: 1px solid rgba(27,27,32,.18);
   border-radius: 999px;
   padding: .58rem .9rem;
-  color: var(--color-ink);
-  background: rgba(255,250,240,.68);
+  color: var(--color-paper);
+  background: rgba(255,250,240,.06);
   font-size: .7rem;
   font-weight: 900;
   letter-spacing: .1em;
@@ -193,6 +207,121 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .status-postponed { background: rgba(244,197,66,.2); color: #715400; }
 .status-active { background: rgba(240,75,155,.14); color: #9e1458; }
 
+.neon-magenta {
+  color: #ff71b6;
+  text-shadow: 0 0 5px rgba(240,75,155,.85), 0 0 22px rgba(240,75,155,.48);
+}
+
+.arcade-intro {
+  --intro-progress: 0;
+  position: fixed;
+  z-index: 80;
+  inset: 0;
+  overflow: hidden;
+  color: var(--color-paper);
+  background: #07070a;
+  pointer-events: auto;
+  opacity: calc(1 - max(0, (var(--intro-progress) - .82) * 5.6));
+}
+.arcade-intro[data-open="true"] { pointer-events: none; visibility: hidden; }
+.arcade-intro-panel {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  width: 53%;
+  border-color: rgba(255,255,255,.06);
+  background:
+    linear-gradient(110deg, rgba(255,255,255,.07), transparent 16% 84%, rgba(255,255,255,.035)),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.025) 0 1px, transparent 1px 18px),
+    #15151b;
+  box-shadow: inset 0 0 60px #050507;
+  will-change: transform;
+}
+.arcade-intro-left {
+  left: 0;
+  border-right: 2px solid rgba(0,200,215,.45);
+  transform: translateX(calc(var(--intro-progress) * -103%));
+}
+.arcade-intro-right {
+  right: 0;
+  border-left: 2px solid rgba(240,75,155,.45);
+  transform: translateX(calc(var(--intro-progress) * 103%));
+}
+.arcade-intro-screen {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  left: 50%;
+  width: min(88vw, 760px);
+  transform: translate(-50%, calc(-50% - var(--intro-progress) * 10vh)) scale(calc(1 - var(--intro-progress) * .08));
+  text-align: center;
+  opacity: calc(1 - var(--intro-progress) * 1.4);
+  will-change: transform, opacity;
+}
+.arcade-intro-kicker {
+  font-family: var(--font-arcade-numeric);
+  font-size: clamp(.6rem, 1.8vw, .78rem);
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--color-arcade-yellow);
+}
+.arcade-intro-title {
+  margin: 1.4rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 15vw, 9.5rem);
+  font-weight: 900;
+  line-height: .72;
+  letter-spacing: -.085em;
+  text-transform: uppercase;
+  text-shadow: 7px 7px 0 #000;
+}
+.arcade-intro-neon {
+  display: inline-block;
+  margin: 1.6rem 0 0;
+  border: 2px solid rgba(0,200,215,.7);
+  border-radius: .7rem;
+  padding: .35rem .7rem .3rem 1rem;
+  font-family: var(--font-arcade-numeric);
+  font-size: clamp(1.1rem, 4vw, 2rem);
+  font-weight: 900;
+  letter-spacing: .38em;
+  color: #c8fcff;
+  background: rgba(0,200,215,.07);
+  box-shadow: inset 0 0 18px rgba(0,200,215,.08), 0 0 24px rgba(0,200,215,.17);
+  text-shadow: var(--effect-neon-glow);
+  animation: arcade-boot 1.25s steps(2, end) 1;
+}
+.arcade-intro-prompt {
+  margin-top: 2.2rem;
+  font-family: var(--font-arcade-numeric);
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(255,250,240,.55);
+  animation: prompt-blink 1.4s steps(2, end) infinite;
+}
+.arcade-intro-scanlines {
+  position: absolute;
+  z-index: 6;
+  inset: 0;
+  pointer-events: none;
+  opacity: .3;
+  background: repeating-linear-gradient(180deg, transparent 0 3px, rgba(0,0,0,.35) 3px 4px);
+  transform: translateY(calc(var(--intro-progress) * -8px));
+}
+
+@keyframes arcade-boot {
+  0%, 18% { opacity: 0; }
+  19%, 42% { opacity: .32; }
+  43%, 58% { opacity: 0; }
+  59%, 76% { opacity: .8; }
+  77%, 100% { opacity: 1; }
+}
+@keyframes prompt-blink { 50% { opacity: .35; } }
+
 .commandment, .trouble-card {
   min-height: 7rem;
   border: 1px solid rgba(27,27,32,.14);
@@ -212,4 +341,5 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
   }
+  .arcade-intro { display: none; }
 }
