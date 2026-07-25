@@ -81,7 +81,7 @@ export function HomePage({ data }: { data: HomeData }) {
         <QuickLink href="/book-jack" title="Hire Jack" copy="Bring the show to your crowd." />
       </section>
 
-      <section className="border-y border-ink/10 bg-paper/45">
+      <section className="home-neon-band border-y border-cream/10">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-14 lg:grid-cols-2">
           <div>
             <p className="eyebrow">Current leaders</p>
