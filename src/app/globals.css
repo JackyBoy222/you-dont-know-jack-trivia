@@ -22,6 +22,7 @@
   --color-neon-cyan: var(--color-electric-cyan);
   --color-neon-magenta: var(--color-hot-magenta);
   --effect-neon-glow: 0 0 5px rgba(0, 200, 215, .62), 0 0 18px rgba(0, 200, 215, .3);
+  --brick-pattern: url("data:image/svg+xml,%3Csvg width='192' height='94' viewBox='0 0 192 94' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 47H192M96 0V47M0 47V94' fill='none' stroke='%23060304' stroke-width='5' opacity='.88'/%3E%3Cpath d='M0 2H192M98 0V47M2 47V94' fill='none' stroke='%23783a42' stroke-width='1.5' opacity='.5'/%3E%3C/svg%3E");
 }
 
 * { box-sizing: border-box; }
@@ -33,8 +34,8 @@ body {
     radial-gradient(ellipse at 92% 34%, rgba(240, 75, 155, .07), transparent 28rem),
     linear-gradient(7deg, transparent 0 69%, rgba(137, 67, 54, .05) 69% 78%, transparent 78%),
     linear-gradient(-11deg, transparent 0 17%, rgba(199, 168, 112, .025) 17% 25%, transparent 25%),
-    url("data:image/svg+xml,%3Csvg width='192' height='94' viewBox='0 0 192 94' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 47H192M96 0V47M0 47V94' fill='none' stroke='%23060304' stroke-width='5' opacity='.82'/%3E%3Cpath d='M0 2H192M98 0V47M2 47V94' fill='none' stroke='%23642c33' stroke-width='1' opacity='.32'/%3E%3C/svg%3E"),
-    linear-gradient(180deg, #2a1114 0%, #1d0c0f 52%, #250e12 100%);
+    var(--brick-pattern),
+    linear-gradient(180deg, #321419 0%, #1d0b0f 52%, #2a1015 100%);
   background-attachment: fixed;
   background-size:
     auto,
@@ -79,14 +80,19 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   position: relative;
   background:
     radial-gradient(circle at 18% 34%, rgba(0,200,215,.045), transparent 25rem),
-    radial-gradient(circle at 82% 62%, rgba(240,75,155,.045), transparent 27rem);
+    radial-gradient(circle at 82% 62%, rgba(240,75,155,.045), transparent 27rem),
+    linear-gradient(7deg, transparent 0 68%, rgba(157,82,62,.055) 68% 78%, transparent 78%),
+    var(--brick-pattern),
+    linear-gradient(180deg, rgba(51,18,24,.94), rgba(24,8,12,.96) 48%, rgba(42,13,19,.94));
+  background-attachment: scroll, scroll, fixed, fixed, fixed;
+  background-size: auto, auto, 38rem 30rem, 192px 94px, auto;
 }
 .arcade-reveal-breath {
   height: clamp(18rem, 50svh, 34rem);
   border-bottom: 1px solid rgba(255,255,255,.025);
   background:
     radial-gradient(ellipse at 50% 100%, rgba(0,200,215,.045), transparent 45%),
-    #09090c;
+    linear-gradient(180deg, rgba(5,3,5,.82), rgba(16,5,8,.46) 72%, rgba(8,3,5,.25));
 }
 html[data-arcade-intro-skipped="true"] .arcade-reveal-breath { display: none; }
 
@@ -453,9 +459,9 @@ html[data-arcade-intro-skipped="true"] .arcade-reveal-breath { display: none; }
   padding: clamp(6rem, 12vh, 10rem) 1rem clamp(8rem, 15vh, 12rem);
   border-bottom: 1px solid rgba(255,255,255,.06);
   background:
-    radial-gradient(ellipse at center, rgba(255,255,255,.035), transparent 58%),
+    radial-gradient(ellipse at center, rgba(255,255,255,.028), transparent 58%),
     repeating-linear-gradient(90deg, rgba(255,255,255,.012) 0 1px, transparent 1px 11px),
-    #09090c;
+    linear-gradient(180deg, rgba(7,4,6,.72), rgba(12,4,7,.4) 70%, rgba(8,3,5,.18));
 }
 .neon-hero::before {
   position: absolute;
@@ -504,12 +510,12 @@ html[data-arcade-intro-skipped="true"] .arcade-reveal-breath { display: none; }
   z-index: 2;
   padding: 0 0 clamp(4rem, 8vw, 7rem);
   background:
-    linear-gradient(180deg, rgba(9,9,12,.96) 0%, rgba(16,16,21,.72) 24%, transparent 100%);
+    linear-gradient(180deg, rgba(7,3,5,.8) 0%, rgba(17,5,9,.5) 24%, transparent 100%);
 }
 .home-neon-band {
   background:
     linear-gradient(90deg, rgba(0,200,215,.035), transparent 34% 66%, rgba(240,75,155,.04)),
-    rgba(8,7,10,.54);
+    rgba(8,3,6,.38);
   box-shadow: inset 0 18px 42px rgba(0,0,0,.2), inset 0 -18px 42px rgba(0,0,0,.2);
 }
 .home-location-label {
