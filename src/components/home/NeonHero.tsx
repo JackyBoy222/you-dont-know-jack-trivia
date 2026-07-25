@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export function NeonHero() {
-  const heroRef = useRef<HTMLElement>(null);
   const [isLit, setIsLit] = useState(false);
 
   useEffect(() => {
@@ -19,24 +19,27 @@ export function NeonHero() {
   }, []);
 
   return (
-    <section ref={heroRef} className="neon-hero" aria-labelledby="home-title">
-      <h1 id="home-title" className="neon-hero-sign">
-        <span className="neon-tube neon-tube-cyan" data-text="YOU DON’T">
-          YOU DON’T
-        </span>
-        <span className="neon-tube neon-tube-magenta" data-text="KNOW JACK">
-          KNOW JACK
-        </span>
-        <span
-          className="neon-trivia-wrap"
+    <section className="neon-hero" aria-labelledby="home-title">
+      <h1 id="home-title" className="sr-only">You Don&apos;t Know Jack Trivia</h1>
+      <div className="neon-hero-artwork" aria-hidden="true">
+        <Image
+          src="/ydkj-neon-hero.png"
+          alt=""
+          width={1672}
+          height={941}
+          className="neon-hero-artwork-top"
+          priority
+        />
+        <Image
+          src="/ydkj-neon-hero.png"
+          alt=""
+          width={1672}
+          height={941}
+          className="neon-hero-artwork-trivia"
           data-lit={isLit}
-        >
-          <span className="neon-tube neon-tube-lime neon-tube-script" data-text="TRIVIA">
-            TRIVIA
-          </span>
-          <span className="neon-trivia-underline" aria-hidden="true" />
-        </span>
-      </h1>
+          priority
+        />
+      </div>
     </section>
   );
 }
