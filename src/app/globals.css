@@ -298,7 +298,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .arcade-intro-screen {
   position: absolute;
   z-index: 4;
-  top: 50%;
+  top: calc(50% + clamp(1rem, 4vh, 3rem));
   left: 50%;
   width: min(88vw, 760px);
   transform: translate(-50%, calc(-50% - var(--intro-progress) * 10vh)) scale(calc(1 - var(--intro-progress) * .08));
@@ -317,37 +317,29 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .arcade-intro-title {
   margin: 1.4rem 0 0;
   font-family: var(--font-display);
-  font-size: clamp(4rem, 15vw, 9.5rem);
+  font-size: clamp(2.8rem, 9vw, 7rem);
   font-weight: 900;
-  line-height: .72;
-  letter-spacing: -.085em;
+  line-height: .82;
+  letter-spacing: -.065em;
   text-transform: uppercase;
-  text-shadow: 7px 7px 0 #000;
-}
-.arcade-intro-neon {
-  display: inline-block;
-  margin: 1.6rem 0 0;
-  border: 2px solid rgba(0,200,215,.7);
-  border-radius: .7rem;
-  padding: .35rem .7rem .3rem 1rem;
-  font-family: var(--font-arcade-numeric);
-  font-size: clamp(1.1rem, 4vw, 2rem);
-  font-weight: 900;
-  letter-spacing: .38em;
-  color: #c8fcff;
-  background: rgba(0,200,215,.07);
-  box-shadow: inset 0 0 18px rgba(0,200,215,.08), 0 0 24px rgba(0,200,215,.17);
-  text-shadow: var(--effect-neon-glow);
-  animation: arcade-boot 1.25s steps(2, end) 1;
+  color: #fffaf0;
+  text-shadow: 5px 5px 0 #000, 0 0 24px rgba(0,200,215,.2);
 }
 .arcade-intro-prompt {
-  margin-top: 2.2rem;
+  display: inline-block;
+  margin-top: 2.3rem;
+  border: 2px solid rgba(244,197,66,.7);
+  border-radius: .55rem;
+  padding: .65rem .9rem .58rem 1.05rem;
   font-family: var(--font-arcade-numeric);
-  font-size: .7rem;
-  font-weight: 800;
-  letter-spacing: .16em;
+  font-size: clamp(.7rem, 1.8vw, .9rem);
+  font-weight: 900;
+  letter-spacing: .18em;
   text-transform: uppercase;
-  color: rgba(255,250,240,.55);
+  color: #ffe588;
+  background: rgba(244,197,66,.06);
+  box-shadow: 0 0 22px rgba(244,197,66,.12), inset 0 0 14px rgba(244,197,66,.08);
+  text-shadow: 0 0 9px rgba(244,197,66,.55);
   animation: prompt-blink 1.4s steps(2, end) infinite;
 }
 .arcade-intro-scanlines {
@@ -368,6 +360,209 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   77%, 100% { opacity: 1; }
 }
 @keyframes prompt-blink { 50% { opacity: .35; } }
+
+.neon-hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  min-height: clamp(42rem, 88svh, 60rem);
+  place-items: center;
+  overflow: hidden;
+  padding: clamp(6rem, 12vh, 10rem) 1rem clamp(8rem, 15vh, 12rem);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  background:
+    radial-gradient(ellipse at center, rgba(255,255,255,.035), transparent 58%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.012) 0 1px, transparent 1px 11px),
+    #09090c;
+}
+.neon-hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  opacity: .12;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 4px, rgba(0,0,0,.48) 4px 5px),
+    radial-gradient(circle at 50% 52%, rgba(255,255,255,.08), transparent 42%);
+}
+.neon-hero-sign {
+  display: grid;
+  width: min(94vw, 64rem);
+  justify-items: center;
+  text-align: center;
+}
+.neon-tube {
+  position: relative;
+  display: block;
+  width: fit-content;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 10.8vw, 8.6rem);
+  font-weight: 900;
+  line-height: .82;
+  letter-spacing: -.065em;
+  white-space: nowrap;
+  -webkit-text-fill-color: #101015;
+  -webkit-text-stroke: clamp(1.5px, .16vw, 2.5px) currentColor;
+}
+.neon-tube::after {
+  position: absolute;
+  inset: 0;
+  content: attr(data-text);
+  color: #fff;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,.76);
+  filter: blur(.25px);
+}
+.neon-tube-cyan {
+  color: #25f7ff;
+  text-shadow: 0 0 4px #fff, 0 0 10px #00e5ef, 0 0 28px rgba(0,229,239,.75), 0 0 64px rgba(0,200,215,.42);
+}
+.neon-tube-magenta {
+  margin-top: .18em;
+  color: #ff3da4;
+  text-shadow: 0 0 4px #fff, 0 0 10px #ff3da4, 0 0 28px rgba(255,61,164,.72), 0 0 64px rgba(240,75,155,.4);
+}
+.neon-trivia-wrap {
+  position: relative;
+  display: grid;
+  width: min(88vw, 50rem);
+  justify-items: center;
+  margin-top: clamp(1rem, 2.5vw, 1.8rem);
+  transform: rotate(-1.5deg);
+}
+.neon-trivia-wrap[data-lit="false"] {
+  opacity: .08;
+  filter: brightness(.35);
+}
+.neon-tube-script {
+  width: 100%;
+  font-family: SignPainter, "Brush Script MT", "Segoe Script", "Snell Roundhand", cursive;
+  font-size: clamp(5.2rem, 13.5vw, 10.5rem);
+  font-style: normal;
+  font-weight: 700;
+  line-height: .72;
+  letter-spacing: -.045em;
+  color: #b8ff2c;
+  -webkit-text-fill-color: #11140d;
+  -webkit-text-stroke: clamp(1.5px, .16vw, 2.5px) currentColor;
+  text-shadow: 0 0 4px #fff, 0 0 10px #b8ff2c, 0 0 28px rgba(184,255,44,.72), 0 0 64px rgba(149,255,0,.38);
+}
+.neon-trivia-underline {
+  display: block;
+  width: 72%;
+  height: clamp(.3rem, .65vw, .55rem);
+  margin-top: clamp(.8rem, 1.8vw, 1.4rem);
+  border-radius: 999px 65% 999px 55%;
+  background: #d7ff8c;
+  box-shadow: 0 0 4px #fff, 0 0 10px #b8ff2c, 0 0 25px rgba(184,255,44,.8), 0 0 48px rgba(149,255,0,.42);
+  transform: translateX(4%) rotate(-2deg);
+}
+.neon-trivia-wrap[data-lit="true"] {
+  animation: neon-ignite .82s steps(1, end) 1 both;
+}
+@keyframes neon-ignite {
+  0%, 13%, 35% { opacity: .08; filter: brightness(.35); }
+  14%, 29%, 36%, 55% { opacity: .62; filter: brightness(.8); }
+  30%, 34%, 56%, 100% { opacity: 1; filter: brightness(1); }
+}
+
+.home-next-section {
+  position: relative;
+  z-index: 2;
+  padding: 0 0 clamp(4rem, 8vw, 7rem);
+  background:
+    linear-gradient(180deg, #09090c 0%, #101015 24%, transparent 100%);
+}
+.home-location-label {
+  padding-top: clamp(3.5rem, 7vw, 6rem);
+  text-align: center;
+  font-family: var(--font-arcade-numeric);
+  font-size: clamp(.72rem, 1.6vw, .9rem);
+  font-weight: 900;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #9ff9ff;
+  text-shadow: 0 0 12px rgba(0,200,215,.48);
+}
+.home-location-label span { padding-inline: .45em; color: #ff71b6; }
+.home-quip {
+  min-height: 3.5rem;
+  margin: 1.25rem auto clamp(2rem, 5vw, 3.5rem);
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  font-weight: 900;
+  letter-spacing: -.025em;
+  color: rgba(255,250,240,.8);
+}
+.next-show-panel {
+  position: relative;
+  overflow: hidden;
+  border: 4px solid #21e9f2;
+  border-radius: clamp(1.25rem, 3vw, 2rem);
+  padding: clamp(1.5rem, 5vw, 3.5rem);
+  color: var(--color-paper);
+  background:
+    linear-gradient(120deg, rgba(255,255,255,.055), transparent 35%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.018) 0 1px, transparent 1px 10px),
+    #17171d;
+  box-shadow: 0 10px 0 #050507, 0 0 14px rgba(0,229,239,.35), 0 0 44px rgba(0,200,215,.18);
+}
+.next-show-panel::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: .55rem;
+  content: "";
+  background: #ff3da4;
+  box-shadow: 0 0 16px #ff3da4;
+}
+.next-show-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.next-show-lights { display: flex; flex-shrink: 0; gap: .55rem; }
+.next-show-lights span {
+  width: .8rem;
+  height: .8rem;
+  border-radius: 50%;
+  background: #ff3da4;
+  box-shadow: 0 0 9px #ff3da4;
+}
+.next-show-lights span:nth-child(2) { background: #f4c542; box-shadow: 0 0 9px #f4c542; }
+.next-show-lights span:nth-child(3) { background: #b8ff2c; box-shadow: 0 0 9px #b8ff2c; }
+.next-show-details {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  border-block: 1px solid rgba(255,255,255,.14);
+  padding-block: 1.5rem;
+}
+.next-show-detail-label {
+  font-family: var(--font-arcade-numeric);
+  font-size: .65rem;
+  font-weight: 900;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #ff86c1;
+}
+
+@media (min-width: 640px) {
+  .next-show-details { grid-template-columns: 1.2fr .8fr; }
+}
+
+@media (max-width: 480px) {
+  .neon-hero { min-height: 72svh; padding-inline: .75rem; }
+  .neon-tube { font-size: clamp(3rem, 15.5vw, 4.6rem); letter-spacing: -.075em; }
+  .neon-trivia-wrap { width: 88vw; }
+  .neon-tube-script { font-size: clamp(4.2rem, 20vw, 6rem); }
+  .next-show-heading { display: block; }
+  .next-show-lights { margin-top: 1.5rem; }
+}
 
 .commandment, .trouble-card {
   min-height: 7rem;
@@ -390,4 +585,5 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     scroll-behavior: auto !important;
   }
   .arcade-intro { display: none; }
+  .neon-trivia-wrap[data-lit="true"] { animation: none; }
 }

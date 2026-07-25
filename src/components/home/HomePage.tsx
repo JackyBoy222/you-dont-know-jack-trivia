@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { CalendarDays, Crown, MapPin, Mic2, Trophy } from "lucide-react";
+import { Crown, MapPin, Trophy } from "lucide-react";
 import { format } from "date-fns";
 import { EventCard } from "@/components/EventCard";
-import { DemoBadge } from "@/components/DemoBadge";
 import { ArcadeIntro } from "@/components/home/ArcadeIntro";
+import { NeonHero } from "@/components/home/NeonHero";
+import { RotatingQuip } from "@/components/home/RotatingQuip";
 import { scoreTotal } from "@/lib/scoring";
 import type { Event, Result, Team, TeamStats } from "@/types";
 
@@ -18,56 +19,50 @@ type HomeData = {
 export function HomePage({ data }: { data: HomeData }) {
   const upcoming = data.events.filter((show) => show.status === "upcoming").sort((a, b) => a.date.localeCompare(b.date));
   const completed = data.events.filter((show) => show.status === "completed").sort((a, b) => b.date.localeCompare(a.date));
-  const quip = data.quips[new Date().getDate() % data.quips.length];
   const latestWinner = data.teams.find((team) => team.id === completed[0]?.winnerId);
 
   return (
     <>
       <ArcadeIntro />
       <div className="arcade-home">
-      <section className="overflow-hidden border-b border-cream/10">
-        <div className="mx-auto grid min-h-[76svh] max-w-6xl content-center gap-12 px-4 py-16 lg:grid-cols-[1.16fr_.84fr] lg:items-center">
-          <div>
-            <DemoBadge />
-            <p className="eyebrow mt-8">Live trivia · New Orleans</p>
-            <h1 className="mt-4 max-w-4xl font-display text-[clamp(4.2rem,12vw,8.4rem)] font-black uppercase leading-[.75] tracking-[-.085em] text-cream">
-              You Don&apos;t<br /><span>Know Jack</span>
-            </h1>
-            <div className="mt-2 flex max-w-[42rem] justify-start">
-              <span className="neon-script neon-cyan inline-block text-[clamp(7rem,16vw,11rem)]">Trivia</span>
-            </div>
-            <p className="mt-8 max-w-xl text-lg font-medium leading-8 text-cream/68">A fast, funny game show for smart friends, loud rooms, and gloriously wrong answers.</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link className="btn-primary" href="/shows"><CalendarDays className="size-5" />Find a show</Link>
-              <Link className="btn-secondary" href="/book-jack"><Mic2 className="size-5" />Book Jack</Link>
-            </div>
-          </div>
-          {upcoming[0] && <article className="cabinet-panel dive-laminate scanlines relative p-7 sm:p-9 lg:mt-10">
-            <div className="absolute right-5 top-5 flex gap-2" aria-hidden="true">
-              <span className="size-3 rounded-full border border-ink bg-magenta" />
-              <span className="size-3 rounded-full border border-ink bg-brass" />
-              <span className="size-3 rounded-full border border-ink bg-emerald" />
-            </div>
-            <p className="eyebrow">Your next bad decision</p>
-            <h2 className="mt-5 font-display text-4xl font-black uppercase leading-[.92] tracking-[-.05em] sm:text-5xl">{upcoming[0].theme}</h2>
-            <div className="mt-7 border-y border-cream/15 py-5">
-              <p className="venue-number text-lg">{format(new Date(upcoming[0].date), "EEEE, MMMM d · h:mm a")}</p>
-              <p className="mt-3 flex gap-2 text-cream/60"><MapPin className="size-5 shrink-0 text-magenta" />{upcoming[0].venue}</p>
-            </div>
-            <Link className="btn-primary mt-7" href="/shows">Show details</Link>
-          </article>}
+      <NeonHero />
+
+      <section className="home-next-section">
+        <div className="mx-auto max-w-5xl px-4">
+          <p className="home-location-label">Live Trivia <span aria-hidden="true">·</span> New Orleans</p>
+          <RotatingQuip quips={data.quips} />
+          {upcoming[0] && (
+            <article className="next-show-panel scanlines">
+              <div className="next-show-heading">
+                <div>
+                  <p className="eyebrow">Your next bad decision</p>
+                  <h2 className="mt-3 font-display text-4xl font-black uppercase leading-[.92] tracking-[-.05em] sm:text-6xl">
+                    {upcoming[0].theme}
+                  </h2>
+                </div>
+                <div className="next-show-lights" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+              </div>
+              <div className="next-show-details">
+                <div>
+                  <p className="next-show-detail-label">When</p>
+                  <p className="venue-number mt-2 text-lg sm:text-xl">{format(new Date(upcoming[0].date), "EEEE, MMMM d · h:mm a")}</p>
+                </div>
+                <div>
+                  <p className="next-show-detail-label">Where</p>
+                  <p className="mt-2 flex gap-2 text-cream/75"><MapPin className="size-5 shrink-0 text-magenta" />{upcoming[0].venue}</p>
+                </div>
+              </div>
+              <div className="mt-7 flex flex-wrap items-center gap-4">
+                <Link className="btn-primary" href="/shows">See show details</Link>
+                <Link className="ticket-link" href="/shows">View all shows</Link>
+              </div>
+            </article>
+          )}
         </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-10">
-        <p className="text-center font-display text-2xl font-black uppercase tracking-[-.03em] text-cream/75">“{quip}”</p>
-      </section>
-
-      <section className="mx-auto grid max-w-6xl gap-4 px-4 py-8 sm:grid-cols-2 lg:grid-cols-4">
-        <QuickLink href="/shows" title="Tonight’s Show" copy="Find out where the trouble is." />
-        <QuickLink href="/leaderboards" title="Current Standings" copy="See who has become unbearable." />
-        <QuickLink href="/winners" title="Latest Winners" copy="Receipts, glory, and bragging rights." />
-        <QuickLink href="/book-jack" title="Hire Jack" copy="Bring the show to your crowd." />
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-14">
@@ -76,6 +71,13 @@ export function HomePage({ data }: { data: HomeData }) {
           <Link className="ticket-link" href="/shows">Full calendar</Link>
         </div>
         <div className="mt-7 grid gap-5 md:grid-cols-3">{upcoming.slice(0, 3).map((show) => <EventCard event={show} key={show.id} />)}</div>
+      </section>
+
+      <section className="mx-auto grid max-w-6xl gap-4 px-4 py-8 sm:grid-cols-2 lg:grid-cols-4">
+        <QuickLink href="/shows" title="Tonight’s Show" copy="Find out where the trouble is." />
+        <QuickLink href="/leaderboards" title="Current Standings" copy="See who has become unbearable." />
+        <QuickLink href="/winners" title="Latest Winners" copy="Receipts, glory, and bragging rights." />
+        <QuickLink href="/book-jack" title="Hire Jack" copy="Bring the show to your crowd." />
       </section>
 
       <section className="border-y border-ink/10 bg-paper/45">

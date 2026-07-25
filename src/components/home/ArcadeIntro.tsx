@@ -22,6 +22,7 @@ export function ArcadeIntro() {
       if (progress >= 0.99) {
         completedRef.current = true;
         setIsOpen(true);
+        window.dispatchEvent(new Event("arcade-intro-complete"));
       }
     };
     const requestUpdate = () => {
@@ -50,10 +51,9 @@ export function ArcadeIntro() {
       <div className="arcade-intro-panel arcade-intro-left" />
       <div className="arcade-intro-panel arcade-intro-right" />
       <div className="arcade-intro-screen">
-        <p className="arcade-intro-kicker">New Orleans · Player One Ready</p>
-        <p className="arcade-intro-title">You Don&apos;t<br />Know Jack</p>
-        <p className="arcade-intro-neon">TRIVIA</p>
-        <p className="arcade-intro-prompt">Scroll to start</p>
+        <p className="arcade-intro-kicker">Player One · Challenge Mode</p>
+        <p className="arcade-intro-title">Think You&apos;re Smarter<br />Than the Room?</p>
+        <p className="arcade-intro-prompt">Scroll to prove it</p>
       </div>
       <div className="arcade-intro-scanlines" />
     </div>
