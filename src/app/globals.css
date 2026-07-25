@@ -22,7 +22,7 @@
   --color-neon-cyan: var(--color-electric-cyan);
   --color-neon-magenta: var(--color-hot-magenta);
   --effect-neon-glow: 0 0 5px rgba(0, 200, 215, .62), 0 0 18px rgba(0, 200, 215, .3);
-  --brick-pattern: url("data:image/svg+xml,%3Csvg width='192' height='94' viewBox='0 0 192 94' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 47H192M96 0V47M0 47V94' fill='none' stroke='%23060304' stroke-width='5' opacity='.88'/%3E%3Cpath d='M0 2H192M98 0V47M2 47V94' fill='none' stroke='%23783a42' stroke-width='1.5' opacity='.5'/%3E%3C/svg%3E");
+  --brick-pattern: url("/dive-bar-brick-wall-v2.jpg");
 }
 
 * { box-sizing: border-box; }
@@ -34,16 +34,17 @@ body {
     radial-gradient(ellipse at 92% 34%, rgba(240, 75, 155, .07), transparent 28rem),
     linear-gradient(7deg, transparent 0 69%, rgba(137, 67, 54, .05) 69% 78%, transparent 78%),
     linear-gradient(-11deg, transparent 0 17%, rgba(199, 168, 112, .025) 17% 25%, transparent 25%),
+    linear-gradient(180deg, rgba(8,2,4,.3), rgba(12,3,6,.54)),
     var(--brick-pattern),
-    linear-gradient(180deg, #321419 0%, #1d0b0f 52%, #2a1015 100%);
+    #17080b;
   background-attachment: fixed;
   background-size:
     auto,
     auto,
     38rem 30rem,
     34rem 26rem,
-    192px 94px,
-    auto;
+    auto,
+    78rem auto;
   color: var(--color-paper);
   font-family: var(--font-readable);
 }
@@ -82,10 +83,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     radial-gradient(circle at 18% 34%, rgba(0,200,215,.045), transparent 25rem),
     radial-gradient(circle at 82% 62%, rgba(240,75,155,.045), transparent 27rem),
     linear-gradient(7deg, transparent 0 68%, rgba(157,82,62,.055) 68% 78%, transparent 78%),
+    linear-gradient(180deg, rgba(8,2,4,.2), rgba(11,3,6,.5) 48%, rgba(9,2,5,.28)),
     var(--brick-pattern),
-    linear-gradient(180deg, rgba(51,18,24,.94), rgba(24,8,12,.96) 48%, rgba(42,13,19,.94));
+    #17080b;
   background-attachment: scroll, scroll, fixed, fixed, fixed;
-  background-size: auto, auto, 38rem 30rem, 192px 94px, auto;
+  background-size: auto, auto, 38rem 30rem, auto, 78rem auto;
 }
 .arcade-reveal-breath {
   height: clamp(18rem, 50svh, 34rem);
