@@ -58,6 +58,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     linear-gradient(90deg, transparent 49.8%, rgba(255,255,255,.018) 50%, transparent 50.2%),
     repeating-linear-gradient(0deg, transparent 0 72px, rgba(255,255,255,.018) 72px 73px);
 }
+.arcade-reveal-breath {
+  height: clamp(12rem, 36svh, 25rem);
+  border-bottom: 1px solid rgba(255,255,255,.025);
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(0,200,215,.045), transparent 45%),
+    #09090c;
+}
 
 .scanlines { position: relative; isolation: isolate; }
 .scanlines::after {
@@ -506,6 +513,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 @media (max-width: 480px) {
+  .arcade-reveal-breath { height: 30svh; }
   .neon-hero { min-height: 72svh; padding-inline: .75rem; }
   .neon-hero-artwork { width: min(118vw, 38rem); }
   .next-show-heading { display: block; }
@@ -533,5 +541,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     scroll-behavior: auto !important;
   }
   .arcade-intro { display: none; }
+  .arcade-reveal-breath { display: none; }
   .neon-hero-artwork-trivia[data-lit="true"] { animation: none; }
 }

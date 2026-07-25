@@ -25,6 +25,7 @@ export function HomePage({ data }: { data: HomeData }) {
     <>
       <ArcadeIntro />
       <div className="arcade-home">
+      <div className="arcade-reveal-breath" aria-hidden="true" />
       <NeonHero />
 
       <section className="home-next-section">
