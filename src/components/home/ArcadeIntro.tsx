@@ -2,15 +2,29 @@
 
 import { useEffect, useRef, useState } from "react";
 
+const INTRO_SEEN_KEY = "ydkj-arcade-intro-seen";
+
 export function ArcadeIntro() {
   const introRef = useRef<HTMLDivElement>(null);
   const completedRef = useRef(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const intro = introRef.current;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
+
+    if (window.sessionStorage.getItem(INTRO_SEEN_KEY) === "true") {
+      completedRef.current = true;
+      document.documentElement.dataset.arcadeIntroSkipped = "true";
+      setIsOpen(true);
+      setIsReady(true);
+      return;
+    }
+
+    delete document.documentElement.dataset.arcadeIntroSkipped;
+    setIsReady(true);
 
     const update = () => {
       frame = 0;
@@ -21,6 +35,7 @@ export function ArcadeIntro() {
       intro?.style.setProperty("--intro-progress", progress.toString());
       if (progress >= 0.99) {
         completedRef.current = true;
+        window.sessionStorage.setItem(INTRO_SEEN_KEY, "true");
         setIsOpen(true);
         window.dispatchEvent(new Event("arcade-intro-complete"));
       }
@@ -46,6 +61,7 @@ export function ArcadeIntro() {
       ref={introRef}
       className="arcade-intro"
       data-open={isOpen}
+      data-ready={isReady}
       aria-hidden="true"
     >
       <div className="arcade-intro-panel arcade-intro-left" />

@@ -8,7 +8,10 @@ export function NeonHero() {
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reducedMotion.matches) {
+    if (
+      reducedMotion.matches ||
+      window.sessionStorage.getItem("ydkj-arcade-intro-seen") === "true"
+    ) {
       setIsLit(true);
       return;
     }

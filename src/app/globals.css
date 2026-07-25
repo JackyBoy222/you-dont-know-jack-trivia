@@ -59,12 +59,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     repeating-linear-gradient(0deg, transparent 0 72px, rgba(255,255,255,.018) 72px 73px);
 }
 .arcade-reveal-breath {
-  height: clamp(12rem, 36svh, 25rem);
+  height: clamp(18rem, 50svh, 34rem);
   border-bottom: 1px solid rgba(255,255,255,.025);
   background:
     radial-gradient(ellipse at 50% 100%, rgba(0,200,215,.045), transparent 45%),
     #09090c;
 }
+html[data-arcade-intro-skipped="true"] .arcade-reveal-breath { display: none; }
 
 .scanlines { position: relative; isolation: isolate; }
 .scanlines::after {
@@ -276,6 +277,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   background: #07070a;
   pointer-events: auto;
   opacity: calc(1 - max(0, (var(--intro-progress) - .82) * 5.6));
+}
+.arcade-intro[data-ready="false"] {
+  opacity: 0;
+  pointer-events: none;
 }
 .arcade-intro[data-open="true"] { pointer-events: none; visibility: hidden; }
 .arcade-intro-panel {
@@ -513,7 +518,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 @media (max-width: 480px) {
-  .arcade-reveal-breath { height: 30svh; }
+  .arcade-reveal-breath { height: 42svh; }
   .neon-hero { min-height: 72svh; padding-inline: .75rem; }
   .neon-hero-artwork { width: min(118vw, 38rem); }
   .next-show-heading { display: block; }
