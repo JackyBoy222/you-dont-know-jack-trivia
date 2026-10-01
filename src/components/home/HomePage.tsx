@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { Crown, MapPin, Trophy } from "lucide-react";
-import { format } from "date-fns";
 import { EventCard } from "@/components/EventCard";
 import { ArcadeIntro } from "@/components/home/ArcadeIntro";
 import { NeonHero } from "@/components/home/NeonHero";
 import { RotatingQuip } from "@/components/home/RotatingQuip";
 import { scoreTotal } from "@/lib/scoring";
+import { formatShowDate } from "@/lib/dates";
 import type { Event, Result, Team, TeamStats } from "@/types";
 
 type HomeData = {
@@ -50,7 +50,7 @@ export function HomePage({ data }: { data: HomeData }) {
               <div className="next-show-details">
                 <div>
                   <p className="next-show-detail-label">When</p>
-                  <p className="venue-number mt-2 text-lg sm:text-xl">{format(new Date(upcoming[0].date), "EEEE, MMMM d · h:mm a")}</p>
+                  <p className="venue-number mt-2 text-lg sm:text-xl">{formatShowDate(upcoming[0].date, { weekday: "long", month: "long", day: "numeric", hour: "numeric", minute: "2-digit" }).replace(" at ", " · ")}</p>
                 </div>
                 <div>
                   <p className="next-show-detail-label">Where</p>
@@ -58,7 +58,7 @@ export function HomePage({ data }: { data: HomeData }) {
                 </div>
               </div>
               <div className="mt-7 flex flex-wrap items-center gap-4">
-                <Link className="btn-primary" href="/shows">See show details</Link>
+                <Link className="btn-primary" href={`/shows/${upcoming[0].slug}`}>See show details</Link>
                 <Link className="ticket-link" href="/shows">View all shows</Link>
               </div>
             </article>

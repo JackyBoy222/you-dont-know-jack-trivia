@@ -1,6 +1,6 @@
 import { CalendarPlus, MapPin } from "lucide-react";
-import { format } from "date-fns";
 import { ButtonLink, Card, SmallLabel } from "@/components/ui";
+import { formatShowDate } from "@/lib/dates";
 import type { Event } from "@/types";
 import { StatusBadge } from "./StatusBadge";
 
@@ -16,7 +16,7 @@ export function EventCard({ event, recap = false }: { event: Event; recap?: bool
     <Card className="flex h-full flex-col gap-4">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <SmallLabel>{format(new Date(event.date), "EEEE · MMMM d")}</SmallLabel>
+          <SmallLabel>{formatShowDate(event.date, { weekday: "long", month: "long", day: "numeric" }).replace(",", " ·")}</SmallLabel>
           <h2 className="mt-1 font-display text-2xl font-bold">{event.theme}</h2>
         </div>
         <StatusBadge status={event.status} />

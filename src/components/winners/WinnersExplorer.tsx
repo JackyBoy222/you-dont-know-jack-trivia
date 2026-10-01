@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Crown, MapPin, Medal, Zap } from "lucide-react";
-import { format } from "date-fns";
 import { DemoBadge } from "@/components/DemoBadge";
+import { formatShowDate, showYear } from "@/lib/dates";
 import { scoreTotal } from "@/lib/scoring";
 import type { Award, Event, Result, Team, Venue } from "@/types";
 
@@ -12,7 +12,7 @@ type Props = { events: Event[]; teams: Team[]; results: Result[]; awards: Award[
 
 export function WinnersExplorer({ events, teams, results, awards, venues }: Props) {
   const history = useMemo(() => events.filter((event) => event.winnerId).sort((a, b) => b.date.localeCompare(a.date)), [events]);
-  const years = [...new Set(history.map((event) => new Date(event.date).getFullYear()))].sort((a, b) => b - a);
+  const years = [...new Set(history.map((event) => Number(showYear(event.date))))].sort((a, b) => b - a);
   const [venueId, setVenueId] = useState("all");
   const [teamId, setTeamId] = useState("all");
   const [year, setYear] = useState("all");
@@ -20,7 +20,7 @@ export function WinnersExplorer({ events, teams, results, awards, venues }: Prop
   const filtered = history.filter((event) =>
     (venueId === "all" || event.venueId === venueId) &&
     (teamId === "all" || event.winnerId === teamId) &&
-    (year === "all" || new Date(event.date).getFullYear().toString() === year)
+    (year === "all" || showYear(event.date) === year)
   );
   const winCounts = teams.map((team) => ({ team, wins: history.filter((event) => event.winnerId === team.id).length })).filter((entry) => entry.wins).sort((a, b) => b.wins - a.wins);
   const latest = history[0];
@@ -44,7 +44,7 @@ export function WinnersExplorer({ events, teams, results, awards, venues }: Prop
       <div className="mt-5 grid gap-4 md:grid-cols-2">{filtered.map((event) => {
         const team = teams.find((item) => item.id === event.winnerId);
         const result = results.find((item) => item.eventId === event.id && item.teamId === event.winnerId);
-        return <article className="card" key={event.id}><div className="flex items-start justify-between gap-3"><Medal className="text-magenta" /><span className="text-xs text-ink/45">{format(new Date(event.date), "MMM d, yyyy")}</span></div><Link className="mt-4 block font-display text-2xl font-bold hover:text-magenta" href={`/teams/${team?.slug ?? ""}`}>{team?.name}</Link><Link className="mt-1 block text-sm text-ink/55 hover:text-magenta" href={`/shows/${event.slug}`}>{event.theme}</Link><p className="mt-3 flex gap-2 text-sm text-ink/48"><MapPin className="size-4 text-magenta" />{event.venue}</p>{result && <p className="venue-number mt-4 text-emerald">{scoreTotal(result)} points</p>}</article>;
+        return <article className="card" key={event.id}><div className="flex items-start justify-between gap-3"><Medal className="text-magenta" /><span className="text-xs text-ink/45">{formatShowDate(event.date, { month: "short", day: "numeric", year: "numeric" })}</span></div><Link className="mt-4 block font-display text-2xl font-bold hover:text-magenta" href={`/teams/${team?.slug ?? ""}`}>{team?.name}</Link><Link className="mt-1 block text-sm text-ink/55 hover:text-magenta" href={`/shows/${event.slug}`}>{event.theme}</Link><p className="mt-3 flex gap-2 text-sm text-ink/48"><MapPin className="size-4 text-magenta" />{event.venue}</p>{result && <p className="venue-number mt-4 text-emerald">{scoreTotal(result)} points</p>}</article>;
       })}</div>
       {!filtered.length && <div className="card mt-5">No winners match those filters. Try widening the velvet rope.</div>}
     </section>
