@@ -1,3 +1,67 @@
-import Link from"next/link";import{Menu}from"lucide-react";
-export function Header(){return <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/90 backdrop-blur"><div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3"><Link href="/" className="font-display text-xl font-black leading-none">You Don’t Know <span className="text-gold">Jack</span></Link><details className="relative md:hidden"><summary className="flex size-12 cursor-pointer list-none items-center justify-center rounded-full border border-white/15" aria-label="Open menu"><Menu/></summary><nav className="absolute right-0 mt-2 grid w-56 gap-1 rounded-2xl border border-white/10 bg-ink p-2 shadow-2xl">{links.map(x=><Link className="rounded-xl px-4 py-3 hover:bg-white/10" key={x.href} href={x.href}>{x.label}</Link>)}</nav></details><nav className="hidden items-center gap-1 md:flex">{links.map(x=><Link className="rounded-full px-4 py-2 text-sm font-semibold text-cream/75 hover:bg-white/10 hover:text-cream" key={x.href} href={x.href}>{x.label}</Link>)}</nav></div></header>}
-const links=[{href:"/events",label:"Upcoming"},{href:"/past",label:"Past Events"},{href:"/winners",label:"Winners"},{href:"/leaderboards",label:"Leaderboards"},{href:"/admin",label:"Host Desk"}];
+import Link from "next/link";
+import Image from "next/image";
+import { Menu } from "lucide-react";
+import { NavigationButton } from "@/components/ui";
+
+export function Header() {
+  return (
+    <header className="sticky top-0 z-40 border-b border-cream/10 bg-ink/90 text-cream backdrop-blur-xl">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+        <Link href="/" className="flex items-center gap-3 font-display text-lg font-black uppercase leading-none tracking-[-.05em]">
+          <Image
+            src="/ydkj-logo.png"
+            alt=""
+            width={42}
+            height={42}
+            className="size-10 rounded-xl border border-cyan/50 object-cover shadow-[3px_3px_0_#f04b9b]"
+          />
+          <span className="text-cream">You Don&apos;t Know Jack</span>
+        </Link>
+        <details className="relative md:hidden">
+          <summary
+            className="arcade-button flex size-12 cursor-pointer list-none items-center justify-center"
+            aria-label="Open menu"
+          >
+            <Menu />
+          </summary>
+          <nav className="absolute right-0 mt-3 grid w-60 gap-1 rounded-2xl border-2 border-cyan/60 bg-ink p-2 shadow-[0_10px_0_#00c8d7]">
+            {links.map((link) => (
+              <Link className={mobileLinkClass()} key={link.href} href={link.href}>
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </details>
+        <nav className="hidden items-center gap-2 md:flex">
+          {links.map((link) => (
+            <NavigationButton
+              className={desktopLinkClass()}
+              key={link.href}
+              href={link.href}
+            >
+              {link.label}
+            </NavigationButton>
+          ))}
+        </nav>
+      </div>
+    </header>
+  );
+}
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/shows", label: "Shows" },
+  { href: "/leaderboards", label: "Leaderboards" },
+  { href: "/winners", label: "Winners" },
+  { href: "/book-jack", label: "Book Jack" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+];
+
+function desktopLinkClass() {
+  return undefined;
+}
+
+function mobileLinkClass() {
+  return "rounded-xl px-4 py-3 text-sm font-bold text-cream/75 hover:bg-cyan/15 hover:text-cyan";
+}

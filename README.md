@@ -21,23 +21,24 @@ All bundled records are clearly marked demo data. They make every screen testabl
 
 ## Technology
 
-Next.js 15, React 19, strict TypeScript, Tailwind CSS, Supabase client libraries, PostgreSQL-compatible SQL, Zod, date-fns, Lucide icons, and Vitest.
+Next.js 16, React 19, strict TypeScript, Tailwind CSS, Supabase client libraries, PostgreSQL-compatible SQL, Zod, date-fns, Lucide icons, and Vitest.
 
 ## Required software
 
-- Node.js 20.9 or newer
-- npm 10 or newer
+- Node.js 22.23.1
+- npm 10.9.8
 - Optional: a Supabase project and Supabase CLI
 
 ## Install and run locally
 
 ```bash
-npm install
+nvm use
+npm ci
 cp .env.example .env.local
 npm run dev
 ```
 
-Open `http://localhost:3000`. The app runs with demo data when Supabase variables are blank.
+Open `http://localhost:3000`. The app runs with demo data when Supabase variables are blank. Starting the dev server automatically clears generated Next.js and TypeScript caches, preventing stale outputs after a move, branch switch, or dependency reset.
 
 ## Environment variables
 
@@ -47,12 +48,13 @@ Open `http://localhost:3000`. The app runs with demo data when Supabase variable
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: public anonymous key
 - `SUPABASE_SERVICE_ROLE_KEY`: server-only administrative key; never expose this in browser code
 - `NEXT_PUBLIC_USE_DEMO_DATA=true`: explicitly selects the local mock service
+- `NEXT_PUBLIC_USE_DEMO_DATA=false`: loads the saved host-console state from Supabase, with a safe demo-data fallback until state has been saved
 
-The Phase 1 UI uses the mock service by default. A production repository implementation should add a `SupabaseDataService` implementing the same `DataService` interface in `src/services/data.ts`.
+The app uses the mock service by default. With Supabase credentials configured and `NEXT_PUBLIC_USE_DEMO_DATA=false`, public pages load the persisted host-console state from `app_settings`.
 
-## Demo host login
+## Host login
 
-Visit `/admin` and use password `lagniappe`. This is clearly labeled development-only authentication. It keeps edits in React state for the browser session; it is not production security or persistent storage.
+With `NEXT_PUBLIC_USE_DEMO_DATA=true`, `/admin` runs locally without authentication and keeps edits in the browser session. With `NEXT_PUBLIC_USE_DEMO_DATA=false`, `/admin` uses Supabase email/password authentication and only permits users whose Auth UUID appears in `admin_users`.
 
 ## Supabase setup and migration
 
@@ -66,18 +68,17 @@ npx supabase link --project-ref YOUR_PROJECT_REF
 npx supabase db push
 ```
 
-The schema is in `supabase/migrations/001_initial_schema.sql`. It normalizes events, rounds, teams, players, memberships, registrations, scores, adjustments, bonuses, perks, results, JackPot records, awards, achievements, announcements, settings, and admins. Supabase Auth is referenced by `admin_users`.
+The ordered migrations in `supabase/migrations` create the core trivia schema, booking/contact inquiries, persisted host-console state, venues, admin authorization, and row-level security. Supabase Auth is referenced by `admin_users`.
 
-Before production, add explicit write policies for authenticated admins and seed the `admin_users` table. Keep the service-role key server-only.
+Before using the production host console, create the host in Supabase Auth and insert that user’s UUID into `admin_users`. Keep the service-role key server-only.
 
 ## Quality commands
 
 ```bash
-npm run lint
-npm run typecheck
-npm test
-npm run build
+npm run verify
 ```
+
+`npm run verify` runs type checking, linting, tests, and a production build. It is also enforced in CI, followed by a health check at `/api/health`.
 
 Tests cover the first and second Wednesday, event status, totals, Double Score, bonus values, Panty Points, bribe limits, JackPot qualification, leaderboard ordering, team statistics, achievements, form validation, and demo loading.
 
@@ -86,7 +87,8 @@ Tests cover the first and second Wednesday, event status, totals, Double Score, 
 1. Push this repository to GitHub, GitLab, or Bitbucket.
 2. Import it at Vercel and accept the detected Next.js settings.
 3. Add the environment variables from `.env.example` in Project Settings → Environment Variables.
-4. Deploy. Keep `NEXT_PUBLIC_USE_DEMO_DATA=true` until the Supabase service implementation is enabled.
+4. Use `NEXT_PUBLIC_USE_DEMO_DATA=false` after the migrations are applied and the host console has saved its initial state.
+5. Deploy, then verify `/api/health`, `/book-jack`, `/contact`, and authenticated `/admin` access.
 
 The same result can be created with `npx vercel` after authenticating the Vercel CLI.
 
@@ -96,7 +98,7 @@ The same result can be created with `npx vercel` after authenticating the Vercel
 - **Port 3000 busy:** run `npm run dev -- --port 3001`.
 - **Supabase migration fails at `auth.users`:** run the SQL inside a Supabase project, not plain PostgreSQL, or remove the `admin_users` foreign key for standalone PostgreSQL.
 - **PWA install is unavailable:** use HTTPS or localhost, then refresh after the first successful load.
-- **Stale Next.js output:** remove `.next` and run `npm run dev` again.
+- **Stale generated output:** run `npm run clean`, then start again with `npm run dev`.
 
 ## Phase 2 (postponed)
 
