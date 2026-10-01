@@ -25,8 +25,8 @@ Next.js 16, React 19, strict TypeScript, Tailwind CSS, Supabase client libraries
 
 ## Required software
 
-- Node.js 22.23.1
-- npm 10.9.8
+- Node.js 22.x
+- npm 10.9.x
 - Optional: a Supabase project and Supabase CLI
 
 ## Install and run locally
