@@ -32,10 +32,13 @@ export function EventCard({ event, recap = false }: { event: Event; recap?: bool
         {recap ? (
           <ButtonLink href={`/past/${event.slug}`}>Read the recap</ButtonLink>
         ) : (
-          <ButtonLink target="_blank" variant="secondary" href={calendarUrl(event)}>
-            <CalendarPlus className="size-4" />
-            Add to calendar
-          </ButtonLink>
+          <>
+            <ButtonLink href={`/shows/${event.slug}`}>Show details</ButtonLink>
+            <ButtonLink target="_blank" variant="secondary" href={calendarUrl(event)}>
+              <CalendarPlus className="size-4" />
+              Add to calendar
+            </ButtonLink>
+          </>
         )}
       </div>
     </Card>

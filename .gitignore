@@ -1,6 +1,7 @@
 node_modules
+node_modules.icloud-*
 .next
-.env.local
+.env*.local
 .env
 *.log
 .DS_Store
