@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Menu } from "lucide-react";
-import { NavigationButton } from "@/components/ui";
 
 export function Header() {
   return (
@@ -25,7 +24,7 @@ export function Header() {
             <Menu />
           </summary>
           <nav className="absolute right-0 mt-3 grid w-60 gap-1 rounded-2xl border-2 border-cyan/60 bg-ink p-2 shadow-[0_10px_0_#00c8d7]">
-            {links.map((link) => (
+            {mobileLinks.map((link) => (
               <Link className={mobileLinkClass()} key={link.href} href={link.href}>
                 {link.label}
               </Link>
@@ -33,34 +32,31 @@ export function Header() {
           </nav>
         </details>
         <nav className="hidden items-center gap-2 md:flex">
-          {links.map((link) => (
-            <NavigationButton
-              className={desktopLinkClass()}
-              key={link.href}
-              href={link.href}
-            >
+          {mainLinks.map((link) => (
+            <Link className="header-link" key={link.href} href={link.href}>
               {link.label}
-            </NavigationButton>
+            </Link>
           ))}
+          <Link className="header-booking-cta" href="/book-jack">Book Jack</Link>
         </nav>
       </div>
     </header>
   );
 }
 
-const links = [
+const mainLinks = [
   { href: "/", label: "Home" },
-  { href: "/shows", label: "Shows" },
+  { href: "/shows", label: "Play" },
   { href: "/leaderboards", label: "Leaderboards" },
-  { href: "/winners", label: "Winners" },
-  { href: "/book-jack", label: "Book Jack" },
   { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
 ];
 
-function desktopLinkClass() {
-  return undefined;
-}
+const mobileLinks = [
+  ...mainLinks,
+  { href: "/winners", label: "Hall of Fame" },
+  { href: "/book-jack", label: "Book Jack" },
+  { href: "/contact", label: "Contact" },
+];
 
 function mobileLinkClass() {
   return "rounded-xl px-4 py-3 text-sm font-bold text-cream/75 hover:bg-cyan/15 hover:text-cyan";

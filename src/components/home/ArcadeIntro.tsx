@@ -31,7 +31,7 @@ export function ArcadeIntro() {
       if (completedRef.current) return;
       const progress = reducedMotion.matches
         ? 1
-        : Math.min(window.scrollY / (window.innerHeight * 0.24), 1);
+        : Math.min(window.scrollY / (window.innerHeight * 0.14), 1);
       intro?.style.setProperty("--intro-progress", progress.toString());
       if (progress >= 0.99) {
         completedRef.current = true;

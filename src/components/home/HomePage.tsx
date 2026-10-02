@@ -69,10 +69,11 @@ export function HomePage({ data }: { data: HomeData }) {
               <h2 className="mt-3 max-w-3xl font-display text-4xl font-black uppercase leading-[.92] tracking-[-.05em] sm:text-6xl">
                 Weekly online trivia is in the works.
               </h2>
+              <p className="neon-script neon-magenta mt-5 text-3xl sm:text-4xl">A little game show. A little dive bar.</p>
               <p className="mt-5 max-w-2xl text-lg text-cream/70">In-person shows appear here when Jack books a gig. No invented dates, no mystery venues.</p>
               <div className="mt-7 flex flex-wrap gap-3">
-                <Link className="btn-primary" href="/book-jack">Book an in-person show</Link>
-                <Link className="btn-secondary" href="/contact">Ask about online trivia</Link>
+                <Link className="btn-primary" href="/contact">Get launch updates</Link>
+                <Link className="btn-secondary" href="/book-jack">Book an in-person show</Link>
               </div>
             </article>
           )}
@@ -87,25 +88,24 @@ export function HomePage({ data }: { data: HomeData }) {
         <div className="mt-7 grid gap-5 md:grid-cols-3">{upcoming.slice(0, 3).map((show) => <EventCard event={show} key={show.id} />)}</div>
       </section>}
 
-      <section className="mx-auto grid max-w-6xl gap-4 px-4 py-8 sm:grid-cols-2 lg:grid-cols-4">
-        <QuickLink href="/shows" title="Shows & updates" copy="See announced gigs and online-trivia news." />
-        <QuickLink href="/leaderboards" title="Current Standings" copy="See who has become unbearable." />
-        <QuickLink href="/winners" title="Latest Winners" copy="Receipts, glory, and bragging rights." />
-        <QuickLink href="/book-jack" title="Hire Jack" copy="Bring the show to your crowd." />
+      <section className="mx-auto grid max-w-6xl gap-4 px-4 py-10 md:grid-cols-3">
+        <QuickLink href="/past" title="From the archive" copy="Past games, strange themes, and surviving evidence." />
+        <QuickLink href="/winners" title="Hall of Fame" copy="Receipts, glory, and bragging rights." />
+        <QuickLink href="/book-jack" title="Book a gig" copy="Bring the show to your crowd." />
       </section>
 
       <section className="home-neon-band border-y border-cream/10">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-14 lg:grid-cols-2">
           <div>
-            <p className="eyebrow">Current leaders</p>
-            <h2 className="mt-2 font-display text-4xl font-black">The sharp end</h2>
-            <ol className="mt-6 grid gap-3">{data.stats.slice(0, 5).map((stat, index) => <li className="card flex items-center justify-between" key={stat.teamId}><span><b className="mr-3 text-magenta">{index + 1}</b><Link href={`/teams/${stat.teamId}`} className="font-bold hover:text-magenta">{stat.name}</Link></span><span className="venue-number text-emerald">{stat.averageScore}</span></li>)}</ol>
+            <p className="eyebrow">From the archive</p>
+            <h2 className="mt-2 font-display text-4xl font-black">Past glory</h2>
+            <ol className="mt-6 grid gap-3">{data.stats.slice(0, 5).map((stat, index) => <li className="archive-card flex items-center justify-between" key={stat.teamId}><span><b className="mr-3 text-magenta">{index + 1}</b><Link href={`/teams/${stat.teamId}`} className="font-bold hover:text-magenta">{stat.name}</Link></span><span className="venue-number text-brass">{stat.averageScore}</span></li>)}</ol>
             <Link className="btn-secondary mt-5" href="/leaderboards"><Trophy className="size-5" />All standings</Link>
           </div>
           <div>
             <p className="eyebrow">Latest winners</p>
             <h2 className="mt-2 font-display text-4xl font-black">Currently insufferable</h2>
-            <article className="card mt-6 p-6"><Crown className="size-9 text-brass" /><h3 className="mt-4 font-display text-3xl font-bold uppercase tracking-[-.04em]">{latestWinner?.name ?? "To be crowned"}</h3><p className="mt-2 text-ink/60">{completed[0]?.theme} · {completed[0]?.venue}</p><p className="mt-4 text-sm text-ink/50">{data.results.find((result) => result.eventId === completed[0]?.id && result.teamId === latestWinner?.id) ? `${scoreTotal(data.results.find((result) => result.eventId === completed[0]?.id && result.teamId === latestWinner?.id)!)} points` : ""}</p></article>
+            <article className="archive-card mt-6 p-6"><Crown className="size-9 text-brass" /><h3 className="mt-4 font-display text-3xl font-bold uppercase tracking-[-.04em]">{latestWinner?.name ?? "To be crowned"}</h3><p className="mt-2 text-ink/60">{completed[0]?.theme} · {completed[0]?.venue}</p><p className="mt-4 text-sm text-ink/50">{data.results.find((result) => result.eventId === completed[0]?.id && result.teamId === latestWinner?.id) ? `${scoreTotal(data.results.find((result) => result.eventId === completed[0]?.id && result.teamId === latestWinner?.id)!)} points` : ""}</p></article>
             <Link className="btn-secondary mt-5" href="/winners">Winner archive</Link>
           </div>
         </div>
@@ -123,5 +123,5 @@ export function HomePage({ data }: { data: HomeData }) {
 }
 
 function QuickLink({ href, title, copy }: { href: string; title: string; copy: string }) {
-  return <Link href={href} className="interactive-card card block"><h2 className="font-display text-2xl font-bold uppercase tracking-[-.04em]">{title}</h2><p className="mt-2 text-sm leading-6 text-ink/58">{copy}</p></Link>;
+  return <Link href={href} className="home-editorial-link block"><h2 className="font-display text-2xl font-bold uppercase tracking-[-.04em]">{title}</h2><p className="mt-2 text-sm leading-6 text-ink/58">{copy}</p><span aria-hidden="true" className="mt-5 block text-right text-xl text-brass">→</span></Link>;
 }
