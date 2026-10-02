@@ -1,1 +1,6 @@
-import type{EventStatus}from"@/types";export function StatusBadge({status}:{status:EventStatus}){return <span className={`inline-flex rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider status-${status}`}>{status}</span>}
+import { Badge } from "@/components/ui";
+import type { EventStatus } from "@/types";
+
+export function StatusBadge({ status }: { status: EventStatus }) {
+  return <Badge className={`status-${status}`}>{status}</Badge>;
+}

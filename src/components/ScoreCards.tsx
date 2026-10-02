@@ -1,1 +1,33 @@
-import Link from"next/link";import type{TeamStats}from"@/types";export function ScoreCards({stats,limit}:{stats:TeamStats[];limit?:number}){return <div className="grid gap-3">{stats.slice(0,limit).map((s,i)=><Link href={`/teams/${s.teamId}`} key={s.teamId} className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 transition hover:border-gold/40"><span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-gold/15 font-display text-xl font-black text-gold">{i+1}</span><div className="min-w-0 flex-1"><p className="truncate font-bold">{s.name}</p><p className="text-xs text-cream/55">{s.wins} wins · {s.gamesAttended} games</p></div><div className="text-right"><p className="font-display text-xl font-black">{s.averageScore}</p><p className="text-[10px] uppercase tracking-wider text-cream/45">avg score</p></div></Link>)}</div>}
+import Link from "next/link";
+import { NumericText } from "@/components/ui";
+import type { TeamStats } from "@/types";
+
+export function ScoreCards({ stats, limit }: { stats: TeamStats[]; limit?: number }) {
+  return (
+    <div className="grid gap-3">
+      {stats.slice(0, limit).map((s, i) => (
+        <Link
+          href={`/teams/${s.teamId}`}
+          key={s.teamId}
+          className="flex items-center gap-4 rounded-lg border border-brass/15 bg-cream/[.045] p-4 transition hover:border-brass/40"
+        >
+          <NumericText className="flex size-10 shrink-0 items-center justify-center rounded-full bg-brass/15 text-xl text-brass">
+            {i + 1}
+          </NumericText>
+          <div className="min-w-0 flex-1">
+            <p className="truncate font-bold">{s.name}</p>
+            <p className="text-xs text-ink/55">
+              {s.wins} wins · {s.gamesAttended} games
+            </p>
+          </div>
+          <div className="text-right">
+            <NumericText className="text-xl text-ink">{s.averageScore}</NumericText>
+            <p className="text-[10px] uppercase tracking-wider text-ink/45">
+              avg score
+            </p>
+          </div>
+        </Link>
+      ))}
+    </div>
+  );
+}

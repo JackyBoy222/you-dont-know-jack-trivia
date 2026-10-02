@@ -1,1 +1,50 @@
-{"name":"ydkj-trivia","version":"1.0.0","private":true,"scripts":{"dev":"next dev","build":"next build","start":"next start","lint":"eslint .","typecheck":"tsc --noEmit","test":"vitest run","test:watch":"vitest"},"dependencies":{"@supabase/ssr":"^0.6.1","@supabase/supabase-js":"^2.49.1","date-fns":"^4.1.0","lucide-react":"^0.468.0","next":"^15.1.4","react":"^19.0.0","react-dom":"^19.0.0","zod":"^3.24.1"},"devDependencies":{"@eslint/eslintrc":"^3.2.0","@testing-library/react":"^16.1.0","@types/node":"^22.10.5","@types/react":"^19.0.3","@types/react-dom":"^19.0.2","autoprefixer":"^10.4.20","eslint":"^9.17.0","eslint-config-next":"^15.1.4","jsdom":"^25.0.1","postcss":"^8.4.49","tailwindcss":"^3.4.17","typescript":"^5.7.2","vitest":"^2.1.8"}}
+{
+  "name": "ydkj-trivia",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "npm@10.9.8",
+  "engines": {
+    "node": "22.x",
+    "npm": ">=10.9.8 <11"
+  },
+  "scripts": {
+    "clean": "node scripts/clean-next.mjs",
+    "predev": "npm run clean",
+    "dev": "next dev",
+    "prebuild": "npm run clean",
+    "build": "next build",
+    "start": "next start",
+    "healthcheck": "node scripts/healthcheck.mjs",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "verify": "node scripts/verify.mjs"
+  },
+  "dependencies": {
+    "@supabase/ssr": "0.6.1",
+    "@supabase/supabase-js": "2.110.7",
+    "date-fns": "4.4.0",
+    "lucide-react": "0.468.0",
+    "next": "^16.3.6",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@testing-library/react": "16.3.2",
+    "@types/node": "22.20.1",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "autoprefixer": "10.5.4",
+    "eslint": "9.39.5",
+    "eslint-config-next": "^16.3.6",
+    "jsdom": "25.0.1",
+    "postcss": "^8.5.24",
+    "tailwindcss": "3.4.19",
+    "typescript": "5.7.2",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.0"
+  }
+}
