@@ -4,7 +4,7 @@ import { InquiryForm } from "@/components/forms/InquiryForm";
 export const metadata = { title: "Book Jack" };
 
 const eventTypes = [
-  ["Weekly venue trivia", "A recurring night that gives regulars a reason to come back."],
+  ["Venue gigs", "A booked trivia night built for your room and your crowd."],
   ["Private parties", "Birthdays, reunions, and celebrations with questions built for your crowd."],
   ["Corporate events", "A polished team experience without the beige conference-room energy."],
   ["Fundraisers & specials", "A lively format that keeps guests participating, laughing, and giving."],

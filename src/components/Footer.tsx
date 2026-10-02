@@ -13,7 +13,7 @@ export function Footer() {
         className="mx-auto mb-5 size-28 rounded-2xl object-cover shadow-[0_0_24px_rgba(240,75,155,.2)]"
       />
       <p className="font-display text-lg uppercase tracking-tight text-cream">{SHOW.name}</p>
-      <p className="mt-1">Live trivia across New Orleans · Public shows and private bookings</p>
+      <p className="mt-1">Weekly online trivia in the works · In-person gigs by booking</p>
       <nav className="mt-4 flex flex-wrap justify-center gap-4">
         <Link className="hover:text-cyan" href="/shows">Find a show</Link>
         <Link className="hover:text-magenta" href="/book-jack">Book Jack</Link>

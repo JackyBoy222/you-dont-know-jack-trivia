@@ -6,7 +6,7 @@ import { InviteRedirect } from "@/components/auth/InviteRedirect";
 
 export const metadata: Metadata = {
   title: { default: "You Don’t Know Jack Trivia", template: "%s · YDKJ Trivia" },
-  description: "Clever, campy live trivia across New Orleans—find a show or bring Jack to your crowd.",
+  description: "Clever, campy trivia online and at booked events—follow the show or bring Jack to your crowd.",
   manifest: "/manifest.webmanifest",
   appleWebApp: { capable: true, title: "YDKJ Trivia" },
 };
