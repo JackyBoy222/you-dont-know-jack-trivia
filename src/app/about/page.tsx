@@ -17,15 +17,18 @@ export default function AboutPage() {
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[.72fr_1.28fr] lg:items-start">
         <aside className="card overflow-hidden p-5 lg:sticky lg:top-28">
-          <Image
-            src="/ydkj-logo.png"
-            alt="You Don’t Know Jack Trivia neon logo"
-            width={1254}
-            height={1254}
-            sizes="(max-width: 1024px) 90vw, 36vw"
-            loading="eager"
-            className="h-auto w-full rounded-xl"
-          />
+          <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
+            <Image
+              src="/jacky-boy-about.jpg"
+              alt="Jacky Boy wearing a black crown in front of a Pride flag"
+              fill
+              sizes="(max-width: 1024px) 90vw, 36vw"
+              preload
+              className="object-cover object-[center_18%]"
+            />
+          </div>
+          <p className="mt-4 text-center font-display text-lg font-black uppercase tracking-[-.03em] text-cream">Jacky Boy</p>
+          <p className="text-center text-sm text-ink/55">Host · Writer · Props guy</p>
         </aside>
 
         <article className="space-y-7 text-[1.05rem] leading-8 text-ink/75 sm:text-lg">
