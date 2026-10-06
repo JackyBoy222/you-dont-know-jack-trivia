@@ -3,7 +3,7 @@ name: Verify application
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [main, codex/launch-pass]
 
 jobs:
   verify:
