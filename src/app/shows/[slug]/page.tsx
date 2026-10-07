@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CalendarPlus, Clock3, MapPin, Trophy } from "lucide-react";
-import { format } from "date-fns";
+import { formatShowDate } from "@/lib/dates";
 import { notFound } from "next/navigation";
 import { calendarUrl } from "@/components/EventCard";
 import { StatusBadge } from "@/components/StatusBadge";
@@ -44,7 +44,7 @@ export default async function ShowPage({ params }: ShowPageProps) {
       </div>
 
       <section className="card mt-9 grid gap-6 p-6 sm:grid-cols-3">
-        <Detail icon={Clock3} label="When" value={format(new Date(show.date), "EEEE, MMMM d · h:mm a")} />
+        <Detail icon={Clock3} label="When" value={formatShowDate(show.date, "EEEE, MMMM d · h:mm a")} />
         <Detail icon={MapPin} label="Where" value={`${show.venue} · ${show.address}`} />
         <Detail icon={Trophy} label="JackPot" value={`${show.jackpot.toLocaleString()} points`} />
       </section>

@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { Crown, MapPin, Trophy } from "lucide-react";
-import { format } from "date-fns";
+import { formatShowDate } from "@/lib/dates";
 import { EventCard } from "@/components/EventCard";
-import { ArcadeIntro } from "@/components/home/ArcadeIntro";
 import { NeonHero } from "@/components/home/NeonHero";
 import { RotatingQuip } from "@/components/home/RotatingQuip";
 import { scoreTotal } from "@/lib/scoring";
@@ -23,15 +22,12 @@ export function HomePage({ data }: { data: HomeData }) {
 
   return (
     <>
-      <ArcadeIntro />
       <div className="arcade-home">
-      <div className="arcade-reveal-breath" aria-hidden="true" />
       <NeonHero />
 
       <section className="home-next-section">
         <div className="mx-auto max-w-5xl px-4">
           <p className="home-location-label">Live Trivia <span aria-hidden="true">·</span> New Orleans</p>
-          <RotatingQuip quips={data.quips} />
           {upcoming[0] && (
             <article className="next-show-panel scanlines">
               <div className="next-show-heading">
@@ -50,7 +46,7 @@ export function HomePage({ data }: { data: HomeData }) {
               <div className="next-show-details">
                 <div>
                   <p className="next-show-detail-label">When</p>
-                  <p className="venue-number mt-2 text-lg sm:text-xl">{format(new Date(upcoming[0].date), "EEEE, MMMM d · h:mm a")}</p>
+                  <p className="venue-number mt-2 text-lg sm:text-xl">{formatShowDate(upcoming[0].date, "EEEE, MMMM d · h:mm a")}</p>
                 </div>
                 <div>
                   <p className="next-show-detail-label">Where</p>
@@ -58,11 +54,12 @@ export function HomePage({ data }: { data: HomeData }) {
                 </div>
               </div>
               <div className="mt-7 flex flex-wrap items-center gap-4">
-                <Link className="btn-primary" href="/shows">See show details</Link>
+                <Link className="btn-primary" href={`/shows/${upcoming[0].slug}`}>See show details</Link>
                 <Link className="ticket-link" href="/shows">View all shows</Link>
               </div>
             </article>
           )}
+          <RotatingQuip quips={data.quips} />
         </div>
       </section>
 
@@ -75,7 +72,7 @@ export function HomePage({ data }: { data: HomeData }) {
       </section>
 
       <section className="mx-auto grid max-w-6xl gap-4 px-4 py-8 sm:grid-cols-2 lg:grid-cols-4">
-        <QuickLink href="/shows" title="Tonight’s Show" copy="Find out where the trouble is." />
+        <QuickLink href="/shows" title="Next Show" copy="Find out where the trouble is." />
         <QuickLink href="/leaderboards" title="Current Standings" copy="See who has become unbearable." />
         <QuickLink href="/winners" title="Latest Winners" copy="Receipts, glory, and bragging rights." />
         <QuickLink href="/book-jack" title="Hire Jack" copy="Bring the show to your crowd." />

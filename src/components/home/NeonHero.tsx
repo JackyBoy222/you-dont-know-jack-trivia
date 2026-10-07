@@ -7,18 +7,7 @@ export function NeonHero() {
   const [isLit, setIsLit] = useState(false);
 
   useEffect(() => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (
-      reducedMotion.matches ||
-      window.sessionStorage.getItem("ydkj-arcade-intro-seen") === "true"
-    ) {
-      setIsLit(true);
-      return;
-    }
-
-    const ignite = () => setIsLit(true);
-    window.addEventListener("arcade-intro-complete", ignite, { once: true });
-    return () => window.removeEventListener("arcade-intro-complete", ignite);
+    setIsLit(true);
   }, []);
 
   return (

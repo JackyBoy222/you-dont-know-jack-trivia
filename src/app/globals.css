@@ -655,3 +655,17 @@ html[data-arcade-intro-skipped="true"] .arcade-reveal-breath { display: none; }
   .arcade-reveal-breath { display: none; }
   .neon-hero-artwork-trivia[data-lit="true"] { animation: none; }
 }
+
+/* Keep the neon identity while putting the next show within easy reach. */
+.neon-hero { min-height: 0; padding: 1.5rem 1rem; }
+.neon-hero-artwork { width: min(76vw, 28rem); }
+@media (max-width: 480px) {
+  .neon-hero { min-height: 0; padding: 1rem .75rem; }
+  .neon-hero-artwork { width: min(88vw, 24rem); }
+}
+.host-score-total { position: sticky; top: 5rem; z-index: 10; }
+
+.home-location-label { padding-top: 1rem; margin-bottom: 1rem; }
+.next-show-panel { padding: clamp(1.25rem, 3vw, 2rem); }
+.home-quip { margin-top: 1.5rem; margin-bottom: 0; }
+.btn-primary:disabled { opacity: .5; cursor: not-allowed; }
