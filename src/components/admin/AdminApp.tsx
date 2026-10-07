@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { events as seedEvents, results as seedResults, teams as seedTeams, venues as seedVenues } from "@/data/demo";
 import { qualifiesForJackpot, scoreTotal } from "@/lib/scoring";
+import { formatShowDate } from "@/lib/dates";
 import { teamStatistics } from "@/lib/stats";
 import type { Event, EventStatus, Result, ShowType, Team, Venue } from "@/types";
 
@@ -212,14 +213,14 @@ function ShowManager({ shows, venues, setShows, saved }: { shows: Event[]; venue
     <form className="card grid gap-4" onSubmit={submit} key={editing?.id ?? "new"}>
       <div className="flex items-center justify-between"><h2 className="font-display text-2xl font-bold">{editing ? "Edit show" : "Create a show"}</h2>{editing && <button type="button" className="text-sm text-ink/50" onClick={() => setEditing(null)}>Cancel</button>}</div>
       <label>Theme<input name="theme" className="field mt-1" defaultValue={editing?.theme} required /></label>
-      <label>Date & time<input name="date" type="datetime-local" className="field mt-1" defaultValue={editing?.date.slice(0, 16)} required /></label>
+      <label>Date & time<input name="date" type="datetime-local" className="field mt-1" defaultValue={editing ? formatShowDate(editing.date, "yyyy-MM-dd'T'HH:mm") : undefined} required /></label>
       <div className="grid gap-4 sm:grid-cols-2"><label>Venue<select name="venueId" className="field mt-1" defaultValue={editing?.venueId}>{venues.filter((venue) => venue.isActive).map((venue) => <option value={venue.id} key={venue.id}>{venue.name}</option>)}</select></label><label>Show type<select name="showType" className="field mt-1" defaultValue={editing?.showType ?? "weekly"}>{["weekly", "private", "corporate", "fundraiser", "special"].map((value) => <option value={value} key={value}>{value}</option>)}</select></label></div>
       <div className="grid gap-4 sm:grid-cols-2"><label>Status<select name="status" className="field mt-1" defaultValue={editing?.status ?? "upcoming"}>{["upcoming", "active", "completed", "canceled", "postponed"].map((value) => <option key={value}>{value}</option>)}</select></label><label>JackPot<input name="jackpot" type="number" min="0" className="field mt-1" defaultValue={editing?.jackpot ?? 1000} /></label></div>
       <label>Announcement<textarea name="announcement" className="field mt-1" defaultValue={editing?.announcement} /></label>
       <div className="grid gap-4 sm:grid-cols-2"><label>Prizes<input name="prizes" className="field mt-1" defaultValue={editing?.prizes} /></label><label>Attendance<input name="attendance" type="number" min="0" className="field mt-1" defaultValue={editing?.attendance} /></label></div>
       <button className="btn-primary"><Save className="size-4" />{editing ? "Save changes" : "Create show"}</button>
     </form>
-    <section><div className="flex items-center justify-between"><h2 className="font-display text-2xl font-bold">Show schedule</h2><span className="text-sm text-ink/45">{shows.length} shows</span></div><div className="mt-4 grid gap-3">{[...shows].sort((a, b) => b.date.localeCompare(a.date)).map((show) => <article className="card flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between" key={show.id}><div><div className="flex flex-wrap items-center gap-2"><b>{show.theme}</b><span className={`status-${show.status} rounded-full px-2 py-1 text-xs`}>{show.status}</span></div><p className="mt-1 text-sm text-ink/50">{show.date.slice(0, 16).replace("T", " · ")} · {show.venue}</p></div><button className="btn-secondary" onClick={() => setEditing(show)}><Pencil className="size-4" />Edit</button></article>)}</div></section>
+    <section><div className="flex items-center justify-between"><h2 className="font-display text-2xl font-bold">Show schedule</h2><span className="text-sm text-ink/45">{shows.length} shows</span></div><div className="mt-4 grid gap-3">{[...shows].sort((a, b) => b.date.localeCompare(a.date)).map((show) => <article className="card flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between" key={show.id}><div><div className="flex flex-wrap items-center gap-2"><b>{show.theme}</b><span className={`status-${show.status} rounded-full px-2 py-1 text-xs`}>{show.status}</span></div><p className="mt-1 text-sm text-ink/50">{formatShowDate(show.date, "yyyy-MM-dd · h:mm a")} · {show.venue}</p></div><button className="btn-secondary" onClick={() => setEditing(show)}><Pencil className="size-4" />Edit</button></article>)}</div></section>
   </div>;
 }
 
