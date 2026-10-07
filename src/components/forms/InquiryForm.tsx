@@ -32,7 +32,7 @@ export function InquiryForm({ kind, deliveryAvailable = true }: InquiryFormProps
     }
   }
 
-  return <form className="card grid gap-4" aria-label={kind === "booking" ? "Booking inquiry" : "General contact form"} onSubmit={submit}>
+  return <form id={kind === "booking" ? "booking-inquiry" : "contact-inquiry"} className="card scroll-mt-24 grid gap-4" aria-label={kind === "booking" ? "Booking inquiry" : "General contact form"} onSubmit={submit}>
     <h2 className="font-display text-3xl font-bold">{kind === "booking" ? "Tell Jack about the room" : "Send a message"}</h2>
     {!deliveryAvailable && <p role="status" className="rounded-xl border border-gold/40 bg-gold/10 p-3 text-sm text-cream">Online messages aren&apos;t available yet. <a className="underline" href="https://www.instagram.com/you.dont.know.jack.trivia/">Contact Jack on Instagram</a> for questions or bookings.</p>}
     <label>Name<input className="field mt-2" name="name" autoComplete="name" maxLength={100} required /></label>
