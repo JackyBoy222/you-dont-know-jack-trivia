@@ -6,3 +6,6 @@ node_modules.icloud-*
 *.log
 .DS_Store
 tsconfig.tsbuildinfo
+.vercel
+.env*
+!.env.example
